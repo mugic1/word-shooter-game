@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import './App.css';
-
 const App = () => {
-  const [words, setWords] = useState([]);
-  const [input, setInput] = useState('');
-  const [score, setScore] = useState(0);
+  const [words, setWords] = React.useState([]);
+  const [input, setInput] = React.useState('');
+  const [score, setScore] = React.useState(0);
+  const [gameOver, setGameOver] = React.useState(false);
 
-  const wordList = ['React', 'JavaScript', 'HTML', 'CSS', 'GitHub'];
+  const wordList = ['React', 'JavaScript', 'HTML', 'CSS', 'GitHub', 'Game', 'Mobile', 'Phone'];
 
-  useEffect(() => {
+  React.useEffect(() => {
     const interval = setInterval(() => {
       const newWord = {
         id: Date.now(),
@@ -18,18 +15,18 @@ const App = () => {
         left: Math.random() * 80
       };
       setWords(prev => [...prev, newWord]);
-    }, 2000);
+    }, 1500);
 
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const moveWords = setInterval(() => {
       setWords(prev => prev.map(word => ({
         ...word,
-        top: word.top + 1
-      })).filter(word => word.top < 90);
-    }, 100);
+        top: word.top + 0.5
+      })).filter(word => word.top < 90));
+    }, 50);
 
     return () => clearInterval(moveWords);
   }, []);
@@ -47,7 +44,8 @@ const App = () => {
 
   return (
     <div className="game-container">
-      <h1>Score: {score}</h1>
+      <h1>Word Shooter Game</h1>
+      <h2>Score: {score}</h2>
       <div className="game-area">
         {words.map(word => (
           <div 
@@ -65,9 +63,12 @@ const App = () => {
         onChange={(e) => setInput(e.target.value)}
         onKeyUp={handleKeyPress}
         placeholder="Type word and press SPACE"
+        autoFocus
       />
+      {gameOver && <div className="game-over">Game Over! Refresh to play again.</div>}
     </div>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
