@@ -4,12 +4,15 @@
   height: 100vh;
   background: #1a1a2e;
   color: white;
+  padding: 20px;
 }
 
 .game-area {
   position: relative;
-  height: 80vh;
-  margin: 20px;
+  height: 70vh;
+  margin: 20px auto;
+  border: 2px solid #e94560;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -17,12 +20,31 @@
   position: absolute;
   font-size: 24px;
   color: #e94560;
+  font-weight: bold;
   text-shadow: 0 0 5px white;
+  transition: all 0.1s;
 }
 
 input {
-  padding: 10px;
-  font-size: 16px;
+  padding: 12px;
+  font-size: 18px;
   width: 80%;
+  max-width: 400px;
   margin-top: 20px;
+  border: 2px solid #e94560;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  padding: 20px;
+  border-radius: 10px;
+  color: red;
+  font-size: 24px;
 }
